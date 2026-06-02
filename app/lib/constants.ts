@@ -1,0 +1,3 @@
+interface TaskType {
+    id: number;
+}
