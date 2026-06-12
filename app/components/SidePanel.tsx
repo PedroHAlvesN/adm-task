@@ -36,7 +36,14 @@ export default function SidePanel() {
           }
         </button>
       </div>
-      <a href="/" className={`${pageLinkStyle} ${pageSelected == "/" && selectedPageLinkStyle}`}>
+      <a href="/" className={
+        `
+          ${pageLinkStyle}
+          ${pageSelected == "/"
+          && selectedPageLinkStyle}
+          ${sidePanelOpen == true ? "w-full" : "w-fit"}
+        `
+      }>
         <ListTodo size={16} strokeWidth={2}/>
         <p className={`
           ${
@@ -48,24 +55,40 @@ export default function SidePanel() {
       </a>
 
       <a href="/calculator"
-        className={
-        `
-          ${pageLinkStyle}
-          ${pageSelected == "calculator"
-          && selectedPageLinkStyle}
-        `}>
+        className=
+          {`
+            ${pageLinkStyle}
+            ${pageSelected == "calculator" && selectedPageLinkStyle}
+            ${sidePanelOpen == true ? "w-full" : "w-fit"}
+          `}
+      >
         <Calculator size={16} strokeWidth={2}/>
-        <p className={truncatedText}>Calculadora</p>
+        <p className={`
+          ${
+            sidePanelOpen == true
+            ? `${truncatedText} visible`
+            : "hidden"
+          }`}
+        >Calculadora</p>
       </a>
 
-      <a href="#" className={
-        `
-          ${pageLinkStyle}
-          ${pageSelected == "calendar"
-          && selectedPageLinkStyle}
-        `}>
+      <a href="#"
+        className=
+          {`
+            ${pageLinkStyle}
+            ${pageSelected == "calendar"
+            && selectedPageLinkStyle}
+            ${sidePanelOpen == true ? "w-full" : "w-fit"}
+          `}
+      >
         <CalendarDays size={16} strokeWidth={2}/>
-        <p className={truncatedText}>Calendário</p>
+        <p className={`
+          ${
+            sidePanelOpen == true
+            ? `${truncatedText} visible`
+            : "hidden"
+          }`}
+        >Calendário</p>
       </a>
 
       <a href="#" className={
@@ -73,9 +96,16 @@ export default function SidePanel() {
           ${pageLinkStyle}
           ${pageSelected == "transfer-diagram"
           && selectedPageLinkStyle}
+          ${sidePanelOpen == true ? "w-full" : "w-fit"}
         `}>
         <SendToBack size={16} strokeWidth={2} className="min-w-[15px] min-h-[15px]"/>
-        <p className={truncatedText} title="Mapa de transferência">Diagrama de transferência</p>
+        <p title="Mapa de transferência" className={`
+          ${
+            sidePanelOpen == true
+            ? `${truncatedText} visible`
+            : "hidden"
+          }`}
+        >Mapa de transferência</p>
       </a>
     </section>
   )
