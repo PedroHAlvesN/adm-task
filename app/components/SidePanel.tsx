@@ -1,15 +1,16 @@
 'use client'
-import * as React from "react"
-import { ListTodo } from 'lucide-react'
-import { CalendarDays } from 'lucide-react'
-import { Calculator } from 'lucide-react'
-import { pageLinkStyle, selectedPageLinkStyle, Title } from "../styles/sidepanel/styles"
+import { 
+  ListTodo, PanelLeftOpen,
+  CalendarDays, SendToBack, ListChecks,
+  PanelLeftClose, Calculator 
+} from 'lucide-react'
+import { pageLinkStyle, selectedPageLinkStyle } from "../styles/sidepanel/styles"
 import { truncatedText } from "../styles/sidepanel/styles"
-import { SendToBack } from 'lucide-react'
 import { useEffect, useState } from "react"
 
 export default function SidePanel() {
   let [pageSelected, setPageSelected] = useState(window.location.pathname)
+  let [sidePanelOpen, setSidePanelOpen] = useState(false);
 
   useEffect(() => {
     setPageSelected(window.location.pathname)
@@ -18,26 +19,62 @@ export default function SidePanel() {
   return (
     <section
       className="max-w-[160px]
-      ml-[8px] flex
+      ml-[24px] flex
       text-gray-950
       flex-col gap-[8px]"
     >
-
-      <h1 className={Title}>Task Manager</h1>
+      <div>
+        <ListChecks size={24} strokeWidth={2} className="p-[4px] rounded-full
+          text-white bg-linear-to-b from-[var(--strong-blue)]
+          to-[var(--strongest-blue)] m-[19px_0_11px_10px]"
+        />
+        <button onClick={() => setSidePanelOpen(!sidePanelOpen)}>
+          {
+            sidePanelOpen == true
+            ? ( <PanelLeftClose size={16} strokeWidth={2} /> )
+            : ( <PanelLeftOpen size={16} strokeWidth={2} /> )
+          }
+        </button>
+      </div>
       <a href="/" className={`${pageLinkStyle} ${pageSelected == "/" && selectedPageLinkStyle}`}>
-        <ListTodo size={15} strokeWidth={2}/>
-        <p className={truncatedText}>Tarefas</p>
+        <ListTodo size={16} strokeWidth={2}/>
+        <p className={`
+          ${
+            sidePanelOpen == true
+            ? `${truncatedText} visible`
+            : "hidden"
+          }`}
+          >Tarefas</p>
       </a>
-      <a href="#" className={`${pageLinkStyle} ${pageSelected == "calculator" && selectedPageLinkStyle}`}>
-        <Calculator size={15} strokeWidth={2}/>
+
+      <a href="/calculator"
+        className={
+        `
+          ${pageLinkStyle}
+          ${pageSelected == "calculator"
+          && selectedPageLinkStyle}
+        `}>
+        <Calculator size={16} strokeWidth={2}/>
         <p className={truncatedText}>Calculadora</p>
       </a>
-      <a href="#" className={`${pageLinkStyle} ${pageSelected == "calendar" && selectedPageLinkStyle}`}>
-        <CalendarDays size={15} strokeWidth={2}/>
+
+      <a href="#" className={
+        `
+          ${pageLinkStyle}
+          ${pageSelected == "calendar"
+          && selectedPageLinkStyle}
+        `}>
+        <CalendarDays size={16} strokeWidth={2}/>
         <p className={truncatedText}>Calendário</p>
       </a>
-      <a href="#" className={`${pageLinkStyle} ${pageSelected == "transfer-diagram" && selectedPageLinkStyle}`}>
-        <SendToBack size={15} strokeWidth={2} className="min-w-[15px] min-h-[15px]"/>
+
+      <a href="#" className={
+        `
+          ${pageLinkStyle}
+          ${pageSelected == "transfer-diagram"
+          && selectedPageLinkStyle}
+        `}>
+        <SendToBack size={16} strokeWidth={2} className="min-w-[15px] min-h-[15px]"/>
         <p className={truncatedText} title="Mapa de transferência">Diagrama de transferência</p>
       </a>
     </section>

@@ -1,33 +1,28 @@
 'use client'
-
-import SidePanel from "./components/SidePanel"
 import Navbar from "./components/Navbar"
 
 export default function Home() {
+  const translatedPageTitle = {
+    "/": "Tarefas",
+    "calculator": "Calculadora",
+    "calendar": "Calendário",
+    "transfer-diagram": "Diagrama de transferência"
+  }
+
   return (
-    <main className="flex flex-row w-full h-full">
-      <SidePanel />
-      <div className="flex flex-col w-full h-full">
-        <h1>{
-              window.location.pathname == "/"
-                ? "Tarefas"
-                : window.location.pathname == "calculator"
-                ? "Calculadora"
-                : window.location.pathname == "calendar"
-                ? "Calendário"
-                : window.location.pathname == "transfer-diagram"
-                && "Diagrama de transferência"
-            }
-        </h1>
-        <section
-          className="flex relative
-            flex-col bg-slate-200 w-full
-            rounded-lg m-[8px] shadow-md
-            shadow-slate-500/20"
-        >
-          <Navbar />
-        </section>
+    <section className="flex flex-col h-full">
+      <h1 className="flex items-center min-h-[62px] text-2xl text-[var(--strongest-blue)] font-bold!">
+        {translatedPageTitle[window.location.pathname]}
+      </h1>
+      <div
+        className="flex relative flex-col 
+          h-full rounded-xl m-[0_24px_8px_0]
+          shadow-[0_0_15px_var(--strong-blue)]/10
+          bg-[var(--alice-blue)]"
+      >
+        <Navbar />
       </div>
-    </main>
+    </section>
+    
   )
 }
