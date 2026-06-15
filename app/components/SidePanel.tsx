@@ -23,16 +23,27 @@ export default function SidePanel() {
       text-gray-950
       flex-col gap-[8px]"
     >
-      <div>
-        <ListChecks size={24} strokeWidth={2} className="p-[4px] rounded-full
-          text-white bg-linear-to-b from-[var(--strong-blue)]
-          to-[var(--strongest-blue)] m-[19px_0_11px_10px]"
+      <div className={`
+        flex ${sidePanelOpen
+          ? "justify-between ml-[12px] mb-[11px]"
+          : "flex-col items-center gap-[11px] mb-[24px]"}
+        mt-[19px]
+      `}>
+        <ListChecks
+          size={24} strokeWidth={2}
+          className="p-[4px] rounded-full
+          text-white bg-linear-to-b
+          from-[var(--strong-blue)]
+          to-[var(--strongest-blue)]"
         />
-        <button onClick={() => setSidePanelOpen(!sidePanelOpen)}>
+        <button onClick={() => setSidePanelOpen(!sidePanelOpen)}
+          className="hover:bg-[var(--strong-blue)]/70
+          p-[5px] rounded-full
+          hover:text-white cursor-pointer">
           {
             sidePanelOpen == true
-            ? ( <PanelLeftClose size={16} strokeWidth={2} /> )
-            : ( <PanelLeftOpen size={16} strokeWidth={2} /> )
+            ? ( <PanelLeftClose size={16} strokeWidth={2} className="cursor-pointer" /> )
+            : ( <PanelLeftOpen size={16} strokeWidth={2} className="cursor-pointer" /> )
           }
         </button>
       </div>
