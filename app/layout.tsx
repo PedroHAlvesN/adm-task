@@ -2,7 +2,11 @@
 import "./globals.css";
 import SidePanel from "./components/SidePanel"
 import Navbar from "./components/Navbar"
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
+
+interface TranslatedPageTitleType {
+  [key: string]: string; 
+}
 
 export default function RootLayout({
   children,
@@ -10,14 +14,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const translatedPageTitle = {
+  const translatedPageTitle: TranslatedPageTitleType = {
     "/": "Tarefas",
     "calculator": "Calculadora",
     "calendar": "Calendário",
     "transfer-diagram": "Diagrama de transferência"
   }
 
-  let [searchedNavbar, setSearchedNavbar] = useState("");
+  let [inputValueNavbar, setInputValueNavbar] = useState("");
   let [pageTitle, setPageTitle] = useState("");
 
   useEffect(() => {
@@ -45,10 +49,11 @@ export default function RootLayout({
           >
             {pageTitle}
           </h1>
-          <Navbar setSearchedNavbar={setSearchedNavbar}
+          <Navbar inputValueNavbar={inputValueNavbar}
+            setInputValueNavbar={setInputValueNavbar}
           />
           <main className="w-full h-full">
-            {children}
+              {children}
           </main>
         </div>
       </body>
